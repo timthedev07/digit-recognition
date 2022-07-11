@@ -1,5 +1,3 @@
 #!/bin/bash
-
-docker run -p 8501:"${PORT}" \
-  --mount type=bind,source="$(pwd)/build",target=/models/digit-recognition \
-  -e MODEL_NAME=digit-recognition -t tensorflow/serving
+tensorflow_model_server --port=8500 --rest_api_port=${PORT:-8501} \
+  --model_name=${MODEL_NAME} --model_base_path=${MODEL_BASE_PATH}/${MODEL_NAME}
