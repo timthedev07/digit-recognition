@@ -58,7 +58,7 @@ def getTrainedModel():
 
 
 def packModel():
-    p = join(dirname(__file__), "build")
+    p = join(dirname(__file__), "build/1")
     model = getTrainedModel()
 
     tf.keras.models.save_model(
