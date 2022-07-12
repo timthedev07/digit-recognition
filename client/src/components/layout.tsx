@@ -51,7 +51,9 @@ export const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
         <link rel="apple-touch-icon" href="/logo192.png" />
       </Head>
 
-      <div id="App">{children}</div>
+      <div id="App" className="text-white">
+        {children}
+      </div>
     </>
   );
 };
