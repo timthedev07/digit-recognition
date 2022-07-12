@@ -167,8 +167,8 @@ export const Canvas = () => {
     <div className="flex flex-col gap-6 select-none">
       <canvas
         ref={hiddenCanvasRef}
-        // hidden={true}
-        className="w-[28px] h-[28px] rounded-md shadow-lg border-2 border-slate-400/60 bg-slate-700 relative" //"display-none"
+        hidden={true}
+        className="w-[28px] h-[28px] rounded-md shadow-lg border-2 border-slate-400/60 bg-slate-700 relative display-none"
         width={CNN_INPUT_SHAPE}
         height={CNN_INPUT_SHAPE}
       />
