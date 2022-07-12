@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Head from "next/head";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
   domain: "https://something.com",
 };
 
-export const Layout: FC = ({ children }) => {
+export const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   // Uncomment this part to switch between desktop & mobile nav
   // const [windowSize, setWindowSize] = useState<number>(0);
 
