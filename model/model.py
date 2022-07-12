@@ -11,19 +11,12 @@ EPOCHS = 3
 def getModel():
     # initialize model
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Conv2D(
-            32, (5, 5), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)
-        ),
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        tf.keras.layers.Conv2D(
-            64, (5, 5), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)
-        ),
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu',
+                               kernel_initializer='he_uniform', input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)),
         tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
         tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(7 * 7 * 64, activation="relu"),
-        tf.keras.layers.Dense(1024, activation="relu"),
-        tf.keras.layers.Dropout(0.5),
-
+        tf.keras.layers.Dense(100, activation="relu",
+                              kernel_initializer="he_uniform"),
         # output layer corresponding to all 10 categories
         tf.keras.layers.Dense(NUM_LABELS, activation="softmax")
     ])
