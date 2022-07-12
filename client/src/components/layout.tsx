@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import Head from "next/head";
+import { AppLoadingProvider } from "./LoadingContext";
 
 export const metadata = {
   title: "Digit Recognition",
@@ -52,7 +53,7 @@ export const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
       </Head>
 
       <div id="App" className="text-white">
-        {children}
+        <AppLoadingProvider>{children}</AppLoadingProvider>
       </div>
     </>
   );

@@ -6,11 +6,23 @@ module.exports = {
   ],
   darkMode: "class",
   mode: "jit",
-  variants: {
+  theme: {
     extend: {
-      typography: ["dark"],
-      cursor: ["focus"],
+      keyframes: {
+        loadingGrow: {
+          from: {
+            left: 0,
+            width: 0,
+          },
+          to: {
+            left: 0,
+            width: "100%",
+          },
+        },
+      },
+      animation: {
+        "loading-grow": "loadingGrow 2s cubic-bezier(1,.11,0,.89) forwards",
+      },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "dragontail-experimental";
 import { imgDataTo3DArr } from "../utils/canvasImgConverter";
+import { useAppLoading } from "./LoadingContext";
 
 const WIDTH = 280;
 const HEIGHT = 280;
@@ -14,6 +15,8 @@ export const Canvas = () => {
   const hiddenCtxRef = useRef<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [prediction, setPrediction] = useState<number | null>(null);
+
+  const { setAppLoading } = useAppLoading();
 
   const startDrawing: React.MouseEventHandler<HTMLCanvasElement> = ({
     nativeEvent,
@@ -125,6 +128,9 @@ export const Canvas = () => {
     const hiddenCtx = hiddenCtxRef.current;
 
     if (!ctx || !hiddenCtx) return;
+
+    setAppLoading(true);
+
     const canvasData = ctx.getImageData(0, 0, WIDTH, HEIGHT);
     // console.log(cnnInput)
     const t = await createImageBitmap(canvasData, {
@@ -161,6 +167,8 @@ export const Canvas = () => {
     }
 
     setPrediction(pred);
+
+    setAppLoading(false);
   };
 
   return (
