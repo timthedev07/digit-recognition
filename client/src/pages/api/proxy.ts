@@ -1,4 +1,5 @@
 import { NextApiHandler } from "next";
+import { BACKEND_BASE } from "../../constants";
 
 const handler: NextApiHandler = async (req, res) => {
   const body = JSON.parse(req.body);
@@ -6,7 +7,7 @@ const handler: NextApiHandler = async (req, res) => {
   if (req.method !== "POST") return;
 
   const response = await fetch(
-    `http://localhost:8501/v1/models/digit-recognition:predict`,
+    `${BACKEND_BASE}/v1/models/digit-recognition:predict`,
     {
       method: "POST",
       body: JSON.stringify({

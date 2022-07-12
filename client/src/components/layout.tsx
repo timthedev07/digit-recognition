@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import Head from "next/head";
 
 export const metadata = {
-  title: "",
+  title: "Digit Recognition",
   image: "",
-  description: "",
-  domain: "https://something.com",
+  description: "Try out digit recognition with a model built with TensorFlow",
+  domain: "",
 };
 
 export const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
