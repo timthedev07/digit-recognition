@@ -50,6 +50,42 @@ export const Canvas = () => {
     ctx.stroke();
   };
 
+  type TEH = React.TouchEventHandler<HTMLCanvasElement>;
+
+  const touchEnd: TEH = () => {
+    endDrawing();
+  };
+  const touchMove: TEH = (e) => {
+    const touch = e.touches[0];
+    const rect = canvasRef.current?.getBoundingClientRect();
+
+    if (!rect) return;
+
+    const offsetX = touch.pageX - rect.left;
+    const offsetY = touch.pageY - rect.top;
+    draw({
+      nativeEvent: {
+        offsetX,
+        offsetY,
+      },
+    } as any);
+  };
+  const touchStart: TEH = (e) => {
+    const touch = e.touches[0];
+    const rect = canvasRef.current?.getBoundingClientRect();
+
+    if (!rect) return;
+
+    const offsetX = touch.pageX - rect.left;
+    const offsetY = touch.pageY - rect.top;
+    startDrawing({
+      nativeEvent: {
+        offsetX,
+        offsetY,
+      },
+    } as any);
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
 
@@ -71,12 +107,15 @@ export const Canvas = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 select-none">
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseUp={endDrawing}
         onMouseMove={draw}
+        onTouchEnd={touchEnd}
+        onTouchStart={touchStart}
+        onTouchMove={touchMove}
         className={`rounded-md shadow-lg border-2 border-slate-400/60 bg-slate-700 relative`}
         style={{
           width: WIDTH,
