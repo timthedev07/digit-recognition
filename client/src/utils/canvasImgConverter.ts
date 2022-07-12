@@ -1,19 +1,18 @@
 export const imgDataTo3DArr = (data: Uint8ClampedArray, width: number) => {
-  let row: number[][] = [];
-  const rows: number[][][] = [];
+  const pixels = [];
+  const rows = [];
 
-  for (let i = 0, n = data.length; i < n; i += 4) {
-    const pixelInRGBA = [data[i], data[i + 1], data[i + 2], data[i + 3]];
+  const n = data.length;
 
-    if (row.length >= width) {
-      rows.push(row);
-      row = [];
-    } else {
-      row.push(pixelInRGBA);
-    }
+  for (let i = 0; i < n; i += 4) {
+    pixels.push([data[i + 3] / 255]);
   }
 
-  rows.push(row);
+  const k = pixels.length;
+
+  for (let j = 0; j < k; j += width) {
+    rows.push(pixels.slice(j, j + width));
+  }
 
   return rows;
 };
